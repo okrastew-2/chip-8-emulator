@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
-project(CMakeSFMLProject LANGUAGES CXX)
+project(CHIP8 LANGUAGES CXX)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
@@ -12,6 +12,9 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(main src/main.cpp)
-target_compile_features(main PRIVATE cxx_std_17)
-target_link_libraries(main PRIVATE SFML::Graphics)
+add_executable(Chip8Emu src/main.cpp src/chip8.cpp)
+
+#set_target_properties(Chip8Emu PROPERTIES WIN32_EXECUTABLE TRUE)
+target_include_directories(Chip8Emu PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc)
+target_compile_features(Chip8Emu PRIVATE cxx_std_17)
+target_link_libraries(Chip8Emu PRIVATE SFML::Graphics SFML::Audio)
